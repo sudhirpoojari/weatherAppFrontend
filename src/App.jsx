@@ -13,7 +13,7 @@ function App() {
     
     try {
       // Remove trailing slash if present to prevent broken double-slash URLs
-      const backendUrl = (import.meta.env.VITE_API_URL || "http://localhost:5000").replace(/\/$/, "");
+      const backendUrl = (import.meta.env.VITE_API_URL || "https://weatherappbackend-rta8.onrender.com:5000").replace(/\/$/, "");
       const res = await axios.get(
         `${backendUrl}/api/weather/${encodeURIComponent(city)}`
       );
