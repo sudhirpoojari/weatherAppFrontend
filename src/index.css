@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+.app {
+  min-height: 100vh;
+  transition: all 0.5s ease;
+  background-size: cover;
+  background-position: center;
+}
+
+/* SUNNY */
+
+.sunny-bg {
+  background: linear-gradient(to top, #4facfe, #00f2fe);
+}
+
+/* RAIN */
+
+.rain-bg {
+  background:
+    linear-gradient(rgba(0,0,0,0.5),
+    rgba(0,0,0,0.5)),
+    url("https://images.unsplash.com/photo-1515694346937-94d85e41e6f0");
+
+  background-size: cover;
+}
+
+/* CLOUDS */
+
+.cloud-bg {
+  background: linear-gradient(to top, #d7d2cc, #304352);
+}
+
+/* SNOW */
+
+.snow-bg {
+  background:
+    linear-gradient(rgba(255,255,255,0.2),
+    rgba(255,255,255,0.2)),
+    url("https://images.unsplash.com/photo-1511131341194-24e2eeeebb09");
+
+  background-size: cover;
+}
+
+/* THUNDER */
+
+.storm-bg {
+  background:
+    linear-gradient(rgba(0,0,0,0.7),
+    rgba(0,0,0,0.7)),
+    url("https://images.unsplash.com/photo-1605727216801-e27ce1d0cc28");
+
+  background-size: cover;
+}
+
+/* MIST */
+
+.mist-bg {
+  background: linear-gradient(to top, #757f9a, #d7dde8);
+}
+
+/* DEFAULT */
+
+.default-bg {
+  background: linear-gradient(to top, #89f7fe, #66a6ff);
+}
