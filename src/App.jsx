@@ -94,131 +94,83 @@ const getWeatherBackground = () => {
       }}
     >
 
-      <div className={`app ${getWeatherBackground()} pt-2`}>
-    
-
-    
-
-
-
-        <div className="  text-5xl py-1 text-orange-700 hover:caret-fuchsia-800 animate-bounce ">Weather App</div>
       
 
-      <form onSubmit={getWeather}>
-
-      <input required className="  bg-amber-200 rounded-2xl"
-        type="text"
-        placeholder="Enter city"
-        value={city}
-        onChange={(e) => setCity(e.target.value)}
-        style={{
-          padding: "10px",
-          width: "250px",
-        }}
-      />
-
-      <button type= "submit" className="p-3 m-1 bg-blue-700 rounded-2xl text-white hover:bg-blue-800"
-        
-        
-      >
-        Search
-      </button>
-
-     
-     <button type="button" className="bg-blue-700  p-3 m-1 rounded-2xl text-white hover:bg-blue-800" onClick = {handleclear}>Reset </button>
-
-      </form>
+      <div className={`app ${getWeatherBackground()} pt-2`}>
+    
+        <div className="text-5xl py-6 font-bold text-white drop-shadow-lg tracking-wide">Weather App</div>
+      
+        <form onSubmit={getWeather} className="flex flex-col sm:flex-row justify-center items-center gap-3 my-6 px-4">
+          <input 
+            required 
+            className="bg-white/90 backdrop-blur-sm border border-gray-300 text-gray-800 rounded-2xl px-5 py-3 w-full sm:w-80 shadow-lg focus:outline-none focus:ring-4 focus:ring-blue-400 transition-all text-lg"
+            type="text"
+            placeholder="Enter city..."
+            value={city}
+            onChange={(e) => setCity(e.target.value)}
+          />
+          <div className="flex gap-2 w-full sm:w-auto justify-center">
+            <button type="submit" className="px-6 py-3 bg-blue-600 rounded-2xl text-white font-semibold shadow-lg hover:bg-blue-700 hover:scale-105 transition-all text-lg w-full sm:w-auto">
+              Search
+            </button>
+            <button type="button" className="px-6 py-3 bg-gray-600 rounded-2xl text-white font-semibold shadow-lg hover:bg-gray-700 hover:scale-105 transition-all text-lg w-full sm:w-auto" onClick={handleclear}>
+              Reset
+            </button>
+          </div>
+        </form>
 
       {weather && (
-        <div
-          style={{
-            marginTop: "1px",
-            border: "1px solid #ccc",
-            padding: "5px",
-            width: "400px",
-            marginInline: "auto",
-            borderRadius: "10px",
-          }}
-        >
-          <div className="bg-lime-900 text-amber-50 pl-2 overflow-x-auto" >
+        <div className="max-w-md mx-auto mt-6 bg-black/50 backdrop-blur-md shadow-2xl rounded-3xl overflow-hidden p-6 text-white border border-white/20 mb-10 mx-4 sm:mx-auto">
+          <h2 className="text-3xl font-bold text-center mb-1">{weather.name}, {weather.sys.country}</h2>
+          <p className="text-center text-xl capitalize mb-6 text-gray-300 font-medium">{weather.weather[0].description}</p>
 
-            <table className="text-left min-w-full">
-              <thead> 
-                <tr>
-                  <th>Description</th>
-                   <th>Weather Details</th>
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-lg">
+              <tbody>
+                <tr className="border-b border-white/10">
+                  <td className="py-3 font-semibold text-gray-300">Sunrise</td>  
+                  <td className="py-3 text-right">{formatTime(weather.sys.sunrise)}</td>
                 </tr>
-                </thead>
-                <tbody>
-                <tr>
-                  <td>City : </td>  
-                  <td>{weather.name}</td>
+                <tr className="border-b border-white/10">
+                  <td className="py-3 font-semibold text-gray-300">Sunset</td>  
+                  <td className="py-3 text-right">{formatTime(weather.sys.sunset)}</td>
                 </tr>
-                <tr>
-                  <td>Country : </td>  
-                  <td>{weather.sys.country}</td>
+                <tr className="border-b border-white/10">
+                  <td className="py-3 font-semibold text-gray-300">Pressure</td>  
+                  <td className="py-3 text-right">{weather.main.pressure} hPa</td>    
                 </tr>
-                <tr>
-                  <td>Sunrise : </td>  
-                  <td>{formatTime(weather.sys.sunrise)}</td>
+                <tr className="border-b border-white/10">
+                  <td className="py-3 font-semibold text-gray-300">Humidity</td>  
+                  <td className="py-3 text-right">{weather.main.humidity}%</td>
                 </tr>
-                <tr>
-                  <td>Sunset : </td>  
-                  <td>{formatTime(weather.sys.sunset)} </td>
+                <tr className="border-b border-white/10">
+                  <td className="py-3 font-semibold text-gray-300">Wind Speed</td>  
+                  <td className="py-3 text-right">{weather.wind.speed} m/s</td>
                 </tr>
-                <tr>
-                  <td>description : </td>  
-                  <td>{weather.weather[0].description}</td>
-                </tr>
-                <tr>
-                  <td>Pressure : </td>  
-                  <td>{weather.main.pressure}</td>    
-                </tr>
-                <tr>
-                  <td>Humidity : </td>  
-                  <td>{weather.main.humidity}</td>
+                {weather.wind.gust && (
+                  <tr className="border-b border-white/10">
+                    <td className="py-3 font-semibold text-gray-300">Wind Gust</td>  
+                    <td className="py-3 text-right">{weather.wind.gust} m/s</td>
+                  </tr>
+                )}
+                <tr className="border-b border-white/10">
+                  <td className="py-3 font-semibold text-gray-300">Coordinates</td>  
+                  <td className="py-3 text-right">[{weather.coord.lat}, {weather.coord.lon}]</td>
                 </tr>
                 <tr>
-                  <td>Wind Speed : </td>  
-                  <td>{weather.wind.speed}</td>
+                  <td className="py-3 font-semibold text-gray-300">Last updated</td>  
+                  <td className="py-3 text-right">{formatTime(weather.dt)}</td>
                 </tr>
-                <tr>
-                  <td>Latitude : </td>  
-                  <td>{weather.coord.lat}</td>
-                </tr>
-                <tr>
-                  <td>Longitude : </td>  
-                  <td>{weather.coord.lon}</td>
-                </tr>
-                 
-                <tr>
-                  <td>Wind Speed : </td>  
-                  <td>{weather.wind.speed}</td>
-                </tr>
-                <tr>
-                  <td>Wind Gust : </td>  
-                  <td>{weather.wind.gust}</td>
-                </tr>
-                <tr>
-                  <td>Last updated : </td>  
-                  <td>{formatTime(weather.dt)}</td>
-                </tr>
-                
-
-
-                </tbody>
-
+              </tbody>
             </table>
-             
           </div>
-
         </div>
       )}
 
 {cityerr && ( 
-      <div className="text-red-500 bg-red-100 p-3 rounded-lg">
-  City not found
-</div>
+      <div className="max-w-md mx-auto text-red-500 bg-red-100/90 backdrop-blur-md p-4 rounded-xl shadow-md font-semibold mt-4">
+        City not found. Please try again.
+      </div>
 )}
 
 {loading && (
@@ -232,6 +184,10 @@ const getWeatherBackground = () => {
 )}
 
     </div>
+
+
+
+
       </div>
   );
 }
